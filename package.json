@@ -1,0 +1,19 @@
+{
+  "name": "fit-file-writer",
+  "version": "0.0.1",
+  "description": "Create (Course) Fit Files in the Browser",
+  "browser": true,
+  "type": "module",
+  "scripts": {
+    "test": "qunit src/*.test.js",
+    "test_watch": "qunit --watch src/*.test.js",
+    "build": "esbuild src/encoder.js --bundle --outfile=dist/fit-file-writer.js"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "fit-file-parser": "1.8.5",
+    "qunit": "^2.19.0",
+    "esbuild": "^0.15.6"
+  }
+}
