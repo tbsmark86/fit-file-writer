@@ -4,7 +4,26 @@ Currently intented for Course-Files but could be extended to other types if desi
 
 ## API
 
-... TODO ... !
+### Course Files
+
+Basic example:
+```
+    const myCourse = new FITCourseFile('course name', 
+	Date.now(), 
+	120 /*duration*/, 
+	[1,1], [10,10]  /* start/stop lat/log */
+	);
+    myCourse
+	.point(stamp /*point timestamp*/, [1,1] /* lat/log*/)
+	.point(stamp, [1,2])
+	.point(stamp, [1,3], 50 /* altitude meters*/, 100 /* total distance */)
+	.point(stamp, [1,4], 55, 150)
+	.turn(stamp, [2,4], 'right' /*turn icon*/, "go right" /*turn text */, 200 /*total distance*/)
+	.point(stamp, [2,5], 50, 250)
+	.turn(stamp, [2,4], 'left');
+    console.log(myCourse.finalize(stamp /* end time */));
+```
+For details  see src/course.js
 
 ### "Low" level API
 
