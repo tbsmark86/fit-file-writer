@@ -28,7 +28,7 @@ QUnit.test('course helper class', async function(assert) {
 	.turn(nowT, [2,4], 'left');
 
     const blob = myCourse.finalize(nowT);
-    assert.equal(blob.size, 332);
+    assert.equal(blob.size, 340);
 
     const parser = new FitParser.default({force: false});
 
@@ -51,7 +51,7 @@ QUnit.test('course helper class', async function(assert) {
 	assert.equal(record.altitude, 50);
 	assert.equal(record.distance, 100);
 
-	assert.equal(data.events.length, 1);
+	assert.equal(data.events.length, 2);
 	
 	assert.equal(data.course_points.length, 2);
 	record = data.course_points[0];

@@ -1,6 +1,6 @@
 {
   "name": "fit-file-writer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Create (Course) Fit Files in the Browser",
   "browser": true,
   "type": "module",

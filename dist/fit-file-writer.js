@@ -398,7 +398,7 @@
 
   // src/course.js
   var FITCourseFile = class {
-    constructor(name, start_time, total_timer_time, start, end) {
+    constructor(name, start_time, total_timer_time, start, end, ascend, descend) {
       this.encoder = new FITEncoder();
       const now = Date.now();
       this.encoder.writeFileId({ type: "course", time_created: now });
@@ -410,7 +410,15 @@
         start_position_long: start[0],
         start_position_lat: start[1],
         end_position_long: end[0],
-        end_position_lat: end[1]
+        end_position_lat: end[1],
+        total_ascent: ascend,
+        total_descent: descend
+      });
+      this.encoder.writeEvent({
+        timestamp: start_time,
+        event: "timer",
+        event_type: "start",
+        event_group: 0
       });
     }
     point(time, pos, altitude2, distance2) {

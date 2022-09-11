@@ -11,8 +11,9 @@ export class FITCourseFile {
      * start_time - Microseconds Timestamp
      * total_time_time - Duration in Seconds
      * start, end - lon/lat array
+     * ascend, descend - meters (optional)
      */
-    constructor(name, start_time, total_timer_time, start, end) {
+    constructor(name, start_time, total_timer_time, start, end, ascend, descend) {
 	this.encoder = new FITEncoder();
 	const now = Date.now();
 
@@ -26,7 +27,15 @@ export class FITCourseFile {
 	    start_position_lat: start[1],
 	    end_position_long: end[0],
 	    end_position_lat: end[1],
+	    total_ascent: ascend,
+	    total_descent: descend
 	});
+	this.encoder.writeEvent({
+	    timestamp: start_time,
+	    event: 'timer',
+	    event_type: 'start',
+	    event_group: 0
+	})
     }
 
     /**
