@@ -81,7 +81,7 @@
   var string = {
     size: 0,
     baseType: 7,
-    mapValue: (value) => Array.from(encodedStr(value)),
+    mapValue: (value) => encodedStr(value),
     setValue: dvSetUint8Array
   };
   var seconds = {
@@ -124,39 +124,10 @@
     date_time
   };
   function encodedStrlen(str) {
-    return Array.from(encodedStr(str)).length;
+    return encodedStr(str).length;
   }
-  function* encodedStr(s) {
-    for (const codePoint of codePoints(s)) {
-      if (codePoint < 128) {
-        yield codePoint;
-      } else {
-        const bytes = [codePoint & 63, codePoint >> 6 & 63, codePoint >> 12 & 63, codePoint >> 18];
-        if (codePoint < 2048) {
-          yield 192 | bytes[1];
-          yield 128 | bytes[0];
-        } else if (codePoint < 65536) {
-          yield 224 | bytes[2];
-          yield 128 | bytes[1];
-          yield 128 | bytes[0];
-        } else {
-          yield 240 | bytes[3];
-          yield 128 | bytes[2];
-          yield 128 | bytes[1];
-          yield 128 | bytes[0];
-        }
-      }
-    }
-    yield 0;
-  }
-  function* codePoints(s) {
-    for (let i = 0; i < s.length; i++) {
-      const codePoint = s.codePointAt(i);
-      if (codePoint > 65535) {
-        i++;
-      }
-      yield codePoint;
-    }
+  function encodedStr(s) {
+    return new TextEncoder("utf-8").encode(s + "\0");
   }
   function dvSetUint8Array(offset, values) {
     const dv = this;
@@ -208,8 +179,7 @@
         { name: "position_long", number: 3, type: "semicircles" },
         { name: "distance", number: 4, type: "distance" },
         { name: "type", number: 5, type: "enum_course_point" },
-        { name: "name", number: 6, type: "string" },
-        { name: "favorite", number: 8, type: "string" }
+        { name: "name", number: 6, type: "string" }
       ]
     },
     event: {
