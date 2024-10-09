@@ -69,8 +69,7 @@ const mesgDefns = {
       { name: 'position_long', number: 3, type: 'semicircles' },
       { name: 'distance', number: 4, type: 'distance' },
       { name: 'type', number: 5, type: 'enum_course_point' },
-      { name: 'name', number: 6, type: 'string' },
-      { name: 'favorite', number: 8, type: 'string' },
+      { name: 'name', number: 6, type: 'string' }
     ]
   },
   event: {
